@@ -9,6 +9,8 @@ const fontSans = FontSans({
 });
 
 import "./globals.css";
+import Sidenav from "@/components/Sidenav";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,10 +27,22 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex max-h-screen md:overflow-hidden">
+            <div className="w-full flex-none md:w-64 h-screen ">
+              <Sidenav />
+            </div>
+            <div className="flex-grow p-6 md:p-12">{children}</div>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
