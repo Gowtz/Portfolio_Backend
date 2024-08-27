@@ -15,7 +15,7 @@ const projects: Project[] = [
       "https://gowtz.s3.ap-south-1.amazonaws.com/projects/Gowtham_Portfolio.png",
     framework: "react",
     desc: "My Simple Portfolio website built using Nextjs",
-    active:true
+    active:false
   },{
     title: "First Project",
     thumbnailURL:
