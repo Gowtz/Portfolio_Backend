@@ -6,3 +6,11 @@ export interface Project {
     desc:string,
     active:boolean
 }
+export interface Blog{
+    title:string,
+    thumbnailUrl:string,
+    content:string,
+    createdAt:string,
+    author:string
+    listed:boolean,
+}

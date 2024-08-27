@@ -19,7 +19,7 @@ import { Textarea } from "../ui/textarea";
 export default function CreateProject() {
 
   return (
-    <div className="btn text-slate-50 bg-blue-500 py-3 px-5 rounded-md ">
+    <div className="btn text-zinc-900 bg-white py-2 px-5 rounded-md hover:bg-slate-100 ">
       <Dialog>
         <DialogTrigger>Add new Projects</DialogTrigger>
         <DialogContent>
