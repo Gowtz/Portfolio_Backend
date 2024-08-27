@@ -32,10 +32,11 @@ model Post {
 }
 
 model Projects {
-  id         String  @id @default(cuid()) @map("_id")
-  title      String
-  imageUrl   String
-  projectUrl String
-  desc       String?
-  active     Boolean
+  id           String  @id @default(cuid()) @map("_id")
+  title        String
+  thumbnailURL String
+  projectUrl   String?
+  framework    String
+  desc         String?
+  active       Boolean
 }

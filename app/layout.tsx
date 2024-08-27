@@ -9,7 +9,6 @@ const fontSans = FontSans({
 });
 
 import "./globals.css";
-import Sidenav from "@/components/Sidenav";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
