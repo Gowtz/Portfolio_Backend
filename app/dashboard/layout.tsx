@@ -1,4 +1,4 @@
-import Sidenav from "@/components/Sidenav";
+import Sidenav from "@/components/Custom/Sidenav";
 import { Metadata } from "next";
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
