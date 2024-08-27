@@ -5,7 +5,7 @@ import Navlinks from "./Navlinks";
 export default function Sidenav() {
   return (
     <>
-      <nav className="flex flex-col bg-slate-100 dark:bg-slate-900 h-screen p-5  text-slate-800 dark:text-slate-100 ">
+      <nav className="flex flex-col bg-slate-100 dark:bg-zinc-900 h-screen p-5  text-slate-800 dark:text-slate-100 ">
         {/* logo */}
         <Link href={"/dashboard"}>
           <div className="logo text-4xl font-bold mb-8 text-center">Gowtz</div>

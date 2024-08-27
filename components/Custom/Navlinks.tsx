@@ -18,8 +18,8 @@ export default function Navlinks() {
     <>
       {links.map((link) => (
         <Link key={link.name} href={link.href}>
-          <li className={cn("hover:bg-slate-300 hover:text-slate-800 rounded-md px-3 py-2 transition ease-in duration-100",{
-            'bg-slate-200 text-slate-800': pathname === link.href
+          <li className={cn("hover:bg-slate-300 hover:text-slate-900 rounded-md px-3 py-2 transition ease-in duration-100",{
+            'bg-slate-200 text-slate-900': pathname === link.href
           })}>
             {link.name}
           </li>
