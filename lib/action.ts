@@ -2,7 +2,13 @@
 
 import prisma from "./prisma";
 import { s3Client } from "nodejs-s3-typescript";
-import { Blog } from "./types";
+import { Blog, Project } from "./types";
+import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { throws } from "assert";
+import Error from "next/error";
+
 const s3Config = {
   bucketName: process.env.AWS_BUCKET_NAME as string,
   region: process.env.AWS_REGION as string,
@@ -25,7 +31,7 @@ export async function newBlog(formData: FormData) {
   const title = formData.get('title') as string
   const image = formData.get('image') as File
   const content = formData.get('content') as string
-  const imageUploaded = await fileUpload(image)
+  const imageUploaded = await fileUpload(image, "blog")
   const blog: Blog = {
     title,
     content,
@@ -38,7 +44,7 @@ export async function newBlog(formData: FormData) {
   try {
     //@ts-ignore
     const data = await prisma.post.create({ data: blog })
-    console.log(data)
+    NextResponse.json({ msg: "Data inserted" })
   } catch (error) {
     console.log("PRISMA ERROR\n", error)
 
@@ -46,13 +52,13 @@ export async function newBlog(formData: FormData) {
 }
 
 
-const fileUpload = async (image: File) => {
+const fileUpload = async (image: File, dir: string) => {
   try {
     const buffer = Buffer.from(await image.arrayBuffer());
     const s3 = new s3Client(
       {
         ...s3Config,
-        dirName: "blog",
+        dirName: dir,
       }
     )
     const filename = await s3.uploadFile(buffer)
@@ -61,4 +67,36 @@ const fileUpload = async (image: File) => {
     console.log("Error while uploading file:\n", error)
 
   }
+}
+
+
+
+export async function projectForm(formData: FormData) {
+  const title = formData.get('title') as string
+  const image = formData.get('image') as File
+  const framework = formData.get('Framework') as string
+  const category = formData.get('Category') as string
+  const desc = formData.get('desc') as string
+  const projectUrl = formData.get('projectUrl') as string
+
+
+  try {
+    const img = await fileUpload(image, 'project')
+    const project: Project = {
+      title,
+      //@ts-ignore
+      thumbnailURL: img.key as string,
+      projectUrl,
+      category,
+      framework,
+      desc,
+      active: false
+    }
+    const data = await prisma.projects.create({ data: project })
+    console.log("Done")
+  } catch (error) {
+    console.log("Error in Data insertion\n", error)
+  }
+  revalidatePath('/dashboard/projects')
+  redirect('/dashboard/blog')
 }

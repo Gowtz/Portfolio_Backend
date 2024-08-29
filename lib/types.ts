@@ -1,10 +1,12 @@
 export interface Project {
-  title: string,
+
+  title     :   string,
   thumbnailURL: string,
-  projectUrl?: string,
-  framework: string,
-  desc: string,
-  active: boolean
+  projectUrl :  string,
+  category  :   string,
+  framework:    string,
+  desc   :      string,
+  active:       boolean,
 }
 export interface Blog {
   title: string,

@@ -6,7 +6,7 @@ export default function page() {
   return (
     <>
       <section className="w-full flex py-7 justify-between items-center">
-        <h1 className="text-3xl"><span className="text-5xl pr-7"> Hi! <span className="bg-slate-700 dark:bg-slate-200 text-slate-50 dark:text-slate-700 px-3 rounded-md">Gowtham</span></span>you have {projects.length} projects and {projects.filter(ele => ele.active ).length} active</h1>
+        <h1 className="text-3xl"><span className="text-5xl pr-7"> Hi! <span className="bg-slate-700 dark:bg-slate-200 text-slate-50 dark:text-slate-700 px-3 rounded-md">Gowtham</span></span>you have {projects.length} projects and {projects.filter(ele => ele.active).length} active</h1>
         <CreateProject />
       </section>
       <hr />

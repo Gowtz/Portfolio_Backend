@@ -1,12 +1,9 @@
 'use client'
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useActionState } from "react";
-import { State, newBlog } from "@/lib/action";
+import { newBlog } from "@/lib/action";
 
-const initialState: State = { message: null, errors: {} }
 export default function page() {
-  // const [state, formAction] = useActionState(newBlog, initialState)
   return (
     <>
       <form action={newBlog}>
