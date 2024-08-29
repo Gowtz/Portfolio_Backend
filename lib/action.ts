@@ -6,8 +6,6 @@ import { Blog, Project } from "./types";
 import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { throws } from "assert";
-import Error from "next/error";
 
 const s3Config = {
   bucketName: process.env.AWS_BUCKET_NAME as string,
@@ -15,43 +13,7 @@ const s3Config = {
   accessKeyId: process.env.AWS_ACCESS_ID as string,
   secretAccessKey: process.env.AWS_SECRET_ID as string
 }
-
-export type State = {
-  errors?: {
-    id?: string[];
-    title?: string[];
-    content?: string[];
-    author?: string[];
-    published?: string[];
-    authorId?: string[];
-  };
-  message?: string | null;
-};
-export async function newBlog(formData: FormData) {
-  const title = formData.get('title') as string
-  const image = formData.get('image') as File
-  const content = formData.get('content') as string
-  const imageUploaded = await fileUpload(image, "blog")
-  const blog: Blog = {
-    title,
-    content,
-    author: "Gowtham",
-    listed: true,
-    // @ts-ignore
-    thumbnailUrl: imageUploaded.key as string,
-    createdAt: Date.now()
-  }
-  try {
-    //@ts-ignore
-    const data = await prisma.post.create({ data: blog })
-    NextResponse.json({ msg: "Data inserted" })
-  } catch (error) {
-    console.log("PRISMA ERROR\n", error)
-
-  }
-}
-
-
+// Desc: generic ImageUpload function
 const fileUpload = async (image: File, dir: string) => {
   try {
     const buffer = Buffer.from(await image.arrayBuffer());
@@ -65,12 +27,39 @@ const fileUpload = async (image: File, dir: string) => {
     return filename
   } catch (error) {
     console.log("Error while uploading file:\n", error)
+  }
+}
 
+// -----------------------BLOG--------------------
+
+// [BLOG] Desc: Create a new blog
+export async function newBlog(formData: FormData) {
+  const title = formData.get('title') as string
+  const image = formData.get('image') as File
+  const content = formData.get('content') as string
+  try {
+    const imageUploaded = await fileUpload(image, "blog")
+    const blog: Blog = {
+      title,
+      content,
+      author: "Gowtham",
+      listed: true,
+      // @ts-ignore
+      thumbnailUrl: imageUploaded.key as string,
+      createdAt: Date.now()
+    }
+    const data = await prisma.post.create({ data: blog })
+    NextResponse.json({ msg: "Data inserted" })
+  } catch (error) {
+    console.log("PRISMA ERROR\n", error)
   }
 }
 
 
 
+// ---------------PROJECTS------------------
+
+// [Projects] Desc:  Create a new projects
 export async function projectForm(formData: FormData) {
   const title = formData.get('title') as string
   const image = formData.get('image') as File
@@ -78,8 +67,6 @@ export async function projectForm(formData: FormData) {
   const category = formData.get('Category') as string
   const desc = formData.get('desc') as string
   const projectUrl = formData.get('projectUrl') as string
-
-
   try {
     const img = await fileUpload(image, 'project')
     const project: Project = {
@@ -100,3 +87,53 @@ export async function projectForm(formData: FormData) {
   revalidatePath('/dashboard/projects')
   redirect('/dashboard/blog')
 }
+
+
+// [Projects] Desc:  get all projects
+export async function getProjects() {
+  try {
+    const data = await prisma.projects.findMany()
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//[Projects] Desc: Edit Project
+export async function editProject(id: string, formData: FormData) {
+  const title = formData.get('title') as string
+  const framework = formData.get('Framework') as string
+  const category = formData.get('Category') as string
+  const desc = formData.get('desc') as string
+  const projectUrl = formData.get('projectUrl') as string
+  try {
+    const data = await prisma.projects.update({
+      where: { id: id },
+      data: {
+        title,
+        category,
+        desc,
+        framework,
+        projectUrl
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// [Projects] Desc:  toggleActive
+export async function toggleActive(id: string, active: boolean) {
+  try {
+    const data = await prisma.projects.update({
+      where: {
+        id: id
+      }, data: {
+        active: !active
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+

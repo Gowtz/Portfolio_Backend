@@ -36,9 +36,9 @@ model Projects {
   id           String  @id @default(cuid()) @map("_id")
   title        String
   thumbnailURL String
-  projectUrl   String?
+  projectUrl   String
   category     String
   framework    String
-  desc         String?
+  desc         String
   active       Boolean
 }
