@@ -19,16 +19,17 @@ model User {
   email    String
   password String
   isAdmin  Boolean
-  Post     Post[]
 }
 
 model Post {
-  id        String  @id @default(cuid()) @map("_id")
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+  id           String  @id @default(cuid()) @map("_id")
+  title        String
+  content      String?
+  published    Boolean @default(false)
+  author       String?
+  listed       Boolean
+  thumbnailUrl String
+  createdAt    Int
 }
 
 model Projects {
@@ -36,6 +37,7 @@ model Projects {
   title        String
   thumbnailURL String
   projectUrl   String?
+  category     String
   framework    String
   desc         String?
   active       Boolean

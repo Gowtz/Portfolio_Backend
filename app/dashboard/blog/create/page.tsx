@@ -1,10 +1,15 @@
+'use client'
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useActionState } from "react";
+import { State, newBlog } from "@/lib/action";
 
+const initialState: State = { message: null, errors: {} }
 export default function page() {
+  // const [state, formAction] = useActionState(newBlog, initialState)
   return (
     <>
-      <form>
+      <form action={newBlog}>
         <h1 className="mb-5 text-3xl">Create a new blog</h1>
         <hr className="my-5" />
         <label htmlFor="Title">Title</label>
@@ -15,7 +20,7 @@ export default function page() {
           className="mt-3 mb-5"
         ></Input>
         <label htmlFor="image">Image</label>
-        <Input type="file" className="mt-3 mb-5" />
+        <Input type="file" name="image" className="mt-3 mb-5" />
         <label htmlFor="content">Content</label>
         <br />
         <textarea
