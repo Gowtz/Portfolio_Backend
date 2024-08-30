@@ -3,7 +3,7 @@ export interface Project {
   title: string;
   thumbnailURL: string;
   projectUrl?: string;
-  category: string;
+  category?: string;
   framework: string;
   desc: string;
   active: boolean;

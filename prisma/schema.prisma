@@ -37,7 +37,7 @@ model Projects {
   title        String
   thumbnailURL String
   projectUrl   String
-  category     String
+  category     String?
   framework    String
   desc         String
   active       Boolean
