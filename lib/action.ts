@@ -43,11 +43,12 @@ export async function newBlog(formData: FormData) {
       title,
       content,
       author: "Gowtham",
-      listed: true,
       // @ts-ignore
       thumbnailUrl: imageUploaded.key as string,
       createdAt: Date.now()
     }
+        // @ts-ignore
+
     const data = await prisma.post.create({ data: blog })
     NextResponse.json({ msg: "Data inserted" })
   } catch (error) {
@@ -87,6 +88,7 @@ export async function projectForm(formData: FormData) {
       desc,
       active: false
     }
+    // @ts-ignore
     const data = await prisma.projects.create({ data: project })
     console.log("Done")
   } catch (error) {

@@ -7,12 +7,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
-import { blogs } from "@/sample/BlogsSample";
 
 export default function BlogCard({ blog }: { blog: Blog }) {
   return (
@@ -29,15 +26,16 @@ export default function BlogCard({ blog }: { blog: Blog }) {
           <div className="flex-grow flex flex-col">
             <div className="flex items-center justify-between">
               <h1 className="text-2xl">{blog.title}</h1>
-              <BlogCardOption listed={blog.listed} />
+              {/* @ts-ignore */}
+              <BlogCardOption published={blog.published} />
             </div>
             <p className="line-clamp-3 dark:text-zinc-300">
               {blog.content}
             </p>
             <div className="py-2">
 
-              {blog.listed && <Badge>Published</Badge>}
-              {!blog.listed && <Badge className="bg-zinc-600 text-slate-50">Unlisted</Badge>}
+              {blog.published&& <Badge>Published</Badge>}
+              {!blog.published && <Badge className="bg-zinc-600 text-slate-50">Unlisted</Badge>}
 
             </div>
             <div className="mt-auto flex justify-between dark:text-zinc-400">
@@ -50,7 +48,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
   );
 }
 
-function BlogCardOption({ listed }: { listed: boolean }) {
+function BlogCardOption({ published }: { published: boolean }) {
   return (
     <>
       <DropdownMenu>
@@ -61,10 +59,10 @@ function BlogCardOption({ listed }: { listed: boolean }) {
           <DropdownMenuItem>Edit</DropdownMenuItem>
           <DropdownMenuItem>Delete</DropdownMenuItem>
 
-          {listed ? (
+          {published ? (
             <DropdownMenuItem>Unlist</DropdownMenuItem>
           ) : (
-            <DropdownMenuItem>publish</DropdownMenuItem>
+            <DropdownMenuItem>Publish</DropdownMenuItem>
           )}
         </DropdownMenuContent>
       </DropdownMenu>
