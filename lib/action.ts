@@ -110,27 +110,28 @@ export async function getProjects() {
 }
 
 //[Projects] Desc: Edit Project
-export async function editProject(id: string, formData: FormData) {
-  const title = formData.get('title') as string
-  const framework = formData.get('Framework') as string
-  const category = formData.get('Category') as string
-  const desc = formData.get('desc') as string
-  const projectUrl = formData.get('projectUrl') as string
-  try {
-    const data = await prisma.projects.update({
-      where: { id: id },
-      data: {
-        title,
-        category,
-        desc,
-        framework,
-        projectUrl
-      }
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
+// Todo: Uncomment later this cause error in production vercel
+// export async function editProject(id: string, formData: FormData) {
+//   const title = formData.get('title') as string
+//   const framework = formData.get('Framework') as string
+//   const category = formData.get('Category') as string
+//   const desc = formData.get('desc') as string
+//   const projectUrl = formData.get('projectUrl') as string
+//   try {
+//     const data = await prisma.projects.update({
+//       where: { id: id },
+//       data: {
+//         title,
+//         category,
+//         desc,
+//         framework,
+//         projectUrl
+//       }
+//     })
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 // [Projects] Desc:  toggleActive
 export async function toggleActive(id: string, active: boolean) {
