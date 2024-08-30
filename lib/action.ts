@@ -55,7 +55,15 @@ export async function newBlog(formData: FormData) {
   }
 }
 
-
+// [Blog] Desc: get Blogs
+export async function getAllBlog() {
+  try {
+    const data = await prisma.post.findMany({ take: 5 })
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 // ---------------PROJECTS------------------
 
