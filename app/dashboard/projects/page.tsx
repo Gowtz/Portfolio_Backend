@@ -5,7 +5,7 @@ import { Project } from "@/lib/types";
 
 export default async function page() {
   const projects = await getProjects()
-  console.log(projects);
+  // console.log(projects);
   
   return (
     <>
