@@ -9,11 +9,10 @@ export default function ProjectCard({ project }: { project: Project }) {
     <Card className="  hover:border-slate-800 dark:hover:border-slate-100 transition ease-linear duration-100">
       <CardContent className=" pt-6 flex flex-col gap-5 ">
         <div className="flex items-center justify-between gap-5">
-          <h1 className="text-3xl">{project.title}</h1>
-          <ProjectOption id={project.id!} active={project.active} />
+          <h1 className="text-2xl">{project.title}</h1>
+          <ProjectOption id={project.id!} active={project.active} link={project.projectUrl!} />
         </div>
         <div className="img relative w-full h-full  aspect-video">
-
         <Image
           src={`${imageURL}/${project.thumbnailURL}`}
           alt="Project image"
@@ -25,7 +24,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         ></Image>
         </div>
         <div>
-          <p className="mb-5">{project.desc}</p>
+          <p className="mb-5 line-clamp-2">{project.desc}</p>
           <Badge>{project.framework}</Badge>
           {project.active && (
             <Badge className="ml-3 bg-green-400">Active</Badge>
