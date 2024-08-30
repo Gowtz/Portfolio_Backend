@@ -1,3 +1,4 @@
+'use client'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,8 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { toggleActive } from "@/lib/action"
 import { DotsVerticalIcon } from "@radix-ui/react-icons"
-export default function ProjectOption({active}:{active:Boolean}) {
+import { useState } from "react"
+export default function ProjectOption({id,active}:{id:string,active:Boolean}) {
   return (
     <>
       <DropdownMenu>
@@ -17,11 +20,12 @@ export default function ProjectOption({active}:{active:Boolean}) {
         <DropdownMenuContent>
           <DropdownMenuItem>Edit</DropdownMenuItem>
           <DropdownMenuItem>Delete</DropdownMenuItem>
-          
-          {active ? <DropdownMenuItem>Remove from active</DropdownMenuItem> :<DropdownMenuItem>Mark as active</DropdownMenuItem>}
+          <DropdownMenuItem onClick={()=>{toggleActive(id,active);
+          }}>
+          {active ? "Remove from active" :"Mark as active"}
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
     </>
   )
 }

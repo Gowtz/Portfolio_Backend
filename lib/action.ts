@@ -123,7 +123,7 @@ export async function editProject(id: string, formData: FormData) {
 }
 
 // [Projects] Desc:  toggleActive
-export async function toggleActive(id: string, active: boolean) {
+export async function toggleActive(id: string, active: Boolean) {
   try {
     const data = await prisma.projects.update({
       where: {
@@ -132,7 +132,9 @@ export async function toggleActive(id: string, active: boolean) {
         active: !active
       }
     })
-  } catch (error) {
+    revalidatePath('/dashboard/projects')
+    console.log(data)
+    } catch (error) {
     console.log(error)
   }
 }
