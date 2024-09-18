@@ -3,14 +3,7 @@ import React from "react";
 import { Card, CardContent } from "../ui/card";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { DotsVerticalIcon } from "@radix-ui/react-icons";
-
+import BlogCardOption from "./BlogCardOptions";
 export default function BlogCard({ blog }: { blog: Blog }) {
   return (
     <>
@@ -30,9 +23,9 @@ export default function BlogCard({ blog }: { blog: Blog }) {
             <div className="flex items-center justify-between">
               <h1 className=" lg:text-3xl">{blog.title}</h1>
               {/* @ts-ignore */}
-              <BlogCardOption published={blog.published} />
+              <BlogCardOption published={blog.published} bid={blog.id} />
             </div>
-            <p className="line-clamp-3 dark:text-zinc-300">{blog.content}</p>
+            <p className="line-clamp-3  mr-5 dark:text-zinc-300">{blog.content}</p>
             <div className="py-2">
               {blog.published && <Badge>Published</Badge>}
               {!blog.published && (
@@ -49,24 +42,3 @@ export default function BlogCard({ blog }: { blog: Blog }) {
   );
 }
 
-function BlogCardOption({ published }: { published: boolean }) {
-  return (
-    <>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <DotsVerticalIcon />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Delete</DropdownMenuItem>
-
-          {published ? (
-            <DropdownMenuItem>Unlist</DropdownMenuItem>
-          ) : (
-            <DropdownMenuItem>Publish</DropdownMenuItem>
-          )}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
-  );
-}
