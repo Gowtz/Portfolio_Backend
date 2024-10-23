@@ -20,7 +20,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
               className="rounded-md"
             />
           </div>
-          <div className="flex-grow flex flex-col">
+          <div className="flex-grow flex flex-col overflow-hidden">
             <div className="flex items-center justify-between">
               <h1 className=" lg:text-3xl">{blog.title}</h1>
               {/* @ts-ignore */}
