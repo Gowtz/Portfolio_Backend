@@ -49,11 +49,10 @@ export async function newBlog(formData: FormData) {
     // @ts-ignore
     const data = await prisma.post.create({ data: blog });
     revalidatePath("/dashboard/blog");
-    return { status: "sucess" };
+    // return { status: "sucess" };
   } catch (error) {
     console.log("PRISMA ERROR\n", error);
   }
-  revalidatePath("/dashboard/blog");
   redirect("/dashboard/blog");
 }
 
@@ -122,6 +121,21 @@ export async function getProjects() {
   }
 }
 
+export async function togglePostPublished(id: string, published: Boolean) {
+  try {
+    const data = await prisma.post.update({
+      where: {
+        id: id,
+      },
+      data: {
+        published: !published,
+      },
+    });
+    revalidatePath("/dashboard/projects");
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function toggleActiveProject(id: string, active: Boolean) {
   try {
     const data = await prisma.projects.update({

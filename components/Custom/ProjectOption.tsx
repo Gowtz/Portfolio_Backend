@@ -27,14 +27,16 @@ export default function ProjectOption({
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <Link href={`https://${link}`} target="_blank">
-          <DropdownMenuItem>Open Project</DropdownMenuItem>
+            <DropdownMenuItem>Open Project</DropdownMenuItem>
           </Link>
           <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem onClick={
-            ()=>{
-              deleteProjectById(id)
-            }
-          }>Delete</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              deleteProjectById(id);
+            }}
+          >
+            Delete
+          </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
               toggleActiveProject(id, active);

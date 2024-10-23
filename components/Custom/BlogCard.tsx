@@ -4,6 +4,7 @@ import { Card, CardContent } from "../ui/card";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
 import BlogCardOption from "./BlogCardOptions";
+import {formatDate } from "@/lib/utils";
 export default function BlogCard({ blog }: { blog: Blog }) {
   return (
     <>
@@ -33,7 +34,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
               )}
             </div>
             <div className="mt-auto text-sm flex justify-between dark:text-zinc-400">
-              Create at : {blog.createdAt}
+              Create at : {formatDate(blog.createdAt)}
             </div>
           </div>
         </CardContent>
