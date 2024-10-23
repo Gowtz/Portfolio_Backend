@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { useActionState } from "react";
 
 
-export function ProfileForm() {
+function ProfileForm() {
   const [errorMessage, formAction, isPending] = useFormState(authenticate, undefined)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
